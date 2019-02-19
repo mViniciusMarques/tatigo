@@ -1,5 +1,6 @@
 package solutions.empire42.tatianego
 
+import android.Manifest
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -16,6 +17,9 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import solutions.empire42.tatianego.fragment.CadastroProdutoFragment
 import solutions.empire42.tatianego.fragment.HomeFragment
 import solutions.empire42.tatianego.fragment.VaquinhaFragment
+import android.support.annotation.NonNull
+
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -104,6 +108,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         ft.replace(R.id.fragment, f1, name)
         ft.commit()
 
-        supportActionBar!!.setTitle(name)
+        supportActionBar!!.title = name
     }
+
 }

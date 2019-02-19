@@ -12,9 +12,9 @@
     <ec.dina.btefonts.TextViewFonts
             android:layout_width="373dp"
             android:layout_height="148dp"
-            android:text="Tati's Cafe"
+            android:text="Tati's Quitutes"
             android:textColor="#000"
-            android:textSize="70sp"
+            android:textSize="60sp"
             app:dm_font="kittenMonoline" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"

@@ -10,7 +10,7 @@ import solutions.empire42.tatianego.R
 
 
 
-class SplashScreenActivity : AppCompatActivity() {
+class SplashScreenActivity: AppCompatActivity() {
 
     var currentUser: ParseUser? = null;
 
@@ -28,7 +28,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
     private fun addTimerToChangePage() {
         val handle = Handler()
-        handle.postDelayed({ startActivity(Intent(this, LoginActivity::class.java)) }, 4000)
+        handle.postDelayed({ startActivity(Intent(this, LoginActivity::class.java)) }, 5000)
     }
 
 

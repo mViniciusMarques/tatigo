@@ -3,6 +3,9 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="solutions.empire42.tatianego">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
             android:name=".core.App"
             android:allowBackup="true"
@@ -12,7 +15,9 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:node="replace">
-        <activity android:name=".view.LoginActivity">
+        <activity
+                android:name=".view.LoginActivity"
+                android:screenOrientation="portrait">
         </activity>
         <activity android:name=".view.SplashScreenActivity">
             <intent-filter>
@@ -25,11 +30,10 @@
                 android:name=".MainActivity"
                 android:label="@string/app_name"
                 android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+        </activity>
+        <activity
+                android:name=".view.CadastroUsuarioActivity"
+                android:screenOrientation="portrait">
         </activity>
     </application>
 

@@ -1,15 +1,18 @@
 package solutions.empire42.tatianego.core;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import com.github.dhaval2404.imagepicker.ImagePicker;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import com.onesignal.OneSignal;
 import com.parse.Parse;
 
 public class App extends Application {
 
     static Context context;
-
 
     @Override
     public void onCreate() {

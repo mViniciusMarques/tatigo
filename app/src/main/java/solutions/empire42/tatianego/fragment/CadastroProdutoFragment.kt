@@ -1,61 +1,153 @@
 package solutions.empire42.tatianego.fragment
 
+import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.ContentValues
 import android.content.Intent
+
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Toast
-import com.github.dhaval2404.imagepicker.ImagePicker
+
+import kotlinx.android.synthetic.main.fragment_cadastro_produto.*
+
 
 import solutions.empire42.tatianego.R
 import java.io.File
 
+import android.os.Environment
+
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
+import android.graphics.Bitmap
+import android.net.Uri
+import android.widget.ImageView
+import android.provider.MediaStore
+import android.support.design.widget.Snackbar
+import android.util.Log
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.single.PermissionListener
+
 
 class CadastroProdutoFragment : Fragment() {
 
+    val PICK_PHOTO_FOR_AVATAR = 1
+    val TAKE_PHOTO_REQUEST = 2
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
+    val REQUEST_IMAGE_CAPTURE = 1
+    private var mImageBitmap: Bitmap? = null
+    private var mCurrentPhotoPath: String? = null
+    private val mImageView: ImageView? = null
 
-        ImagePicker.with(requireActivity())
-            .crop(1f, 1f)                //Crop Square image(Optional)
-            .compress(1024)            //Final image size will be less than 1 MB(Optional)
-            .maxResultSize(620, 620)    //Final image resolution will be less than 620 x 620(Optional)
-            .start()
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
 
         return inflater.inflate(R.layout.fragment_cadastro_produto, container, false)
     }
 
+    override fun onResume() {
+        super.onResume()
+        lastday.setOnClickListener {
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/*"
+            startActivityForResult(intent, PICK_PHOTO_FOR_AVATAR)
+        }
+
+
+        camera.setOnClickListener {
+            launchCamera()
+        }
+
+
+
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-//        if (resultCode == Activity.RESULT_OK) {
-//            //Image Uri will not be null for RESULT_OK
-//            val fileUri = data?.data
-//            imgProfile.setImageURI(fileUri)
-//
-//            //You can get File object from intent
-//            val file:File = ImagePicker.getFile(data)
-//
-//            //You can also get File Path from intent
-//            val filePath:String = ImagePicker.getFilePath(data)
-//        } else if (resultCode == ImagePicker.RESULT_ERROR) {
-//            Toast.makeText(context, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
-//        } else {
-//            Toast.makeText(context, "Task Cancelled", Toast.LENGTH_SHORT).show()
-//        }
+        if (requestCode == PICK_PHOTO_FOR_AVATAR && resultCode == Activity.RESULT_OK) {
+            if (data == null) {
+                //Display an error
+                return
+            }
+            data.data
+            val inputStream = context!!.contentResolver.openInputStream(data.data)
+        }
+
+        if (resultCode == Activity.RESULT_OK
+            && requestCode == TAKE_PHOTO_REQUEST) {
+           // processCapturedPhoto()
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
 
     }
 
-    fun tnv(view: View ) {
-        ImagePicker.with(requireActivity())
-            .galleryOnly()       //User can only select image from Gallery
-            .start()
+    private fun validatePermissions() {
+        Dexter.withActivity(Activity())
+            .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            .withListener(object: PermissionListener {
+                override fun onPermissionGranted(
+                    response: PermissionGrantedResponse?) {
+                    launchCamera()
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    permission: PermissionRequest?,
+                    token: PermissionToken?) {
+                    AlertDialog.Builder(context)
+                        .setTitle(
+                           "sdsad")
+                        .setMessage(
+                           "bomobom")
+                        .setNegativeButton(
+                            android.R.string.cancel,
+                            { dialog, _ ->
+                                dialog.dismiss()
+                                token?.cancelPermissionRequest()
+                            })
+                        .setPositiveButton(android.R.string.ok,
+                            { dialog, _ ->
+                                dialog.dismiss()
+                                token?.continuePermissionRequest()
+                            })
+                        .setOnDismissListener({
+                            token?.cancelPermissionRequest() })
+                        .show()
+                }
+
+                override fun onPermissionDenied(
+                    response: PermissionDeniedResponse?) {
+
+                }
+            })
+            .check()
     }
+
+    private fun launchCamera() {
+        val values = ContentValues(1)
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpg")
+//        val fileUri = contentResolver
+//            .insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+//                values)
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if(intent.resolveActivity(context?.packageManager) != null) {
+           // mCurrentPhotoPath = fileUri.toString()
+          //  intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri)
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+            startActivityForResult(intent, TAKE_PHOTO_REQUEST)
+        }
+    }
+
+
+
 
 }

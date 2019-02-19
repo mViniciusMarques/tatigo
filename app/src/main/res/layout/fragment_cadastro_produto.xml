@@ -8,19 +8,29 @@
                                              android:id="@+id/linearLayout">
 
 
-    <include android:layout_width="341dp" android:layout_height="547dp" layout="@layout/inc_form_cadastro"
+    <include android:layout_width="341dp" android:layout_height="370dp" layout="@layout/inc_form_cadastro"
              app:layout_constraintStart_toStartOf="parent"
              android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
              android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
              app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.082"
              android:id="@+id/include"/>
     <Button
-            android:text="teste galeria"
+            android:text="Galeria"
+            android:layout_width="wrap_content"
+            android:layout_height="59dp"
+            android:id="@+id/lastday" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp" app:layout_constraintTop_toBottomOf="@+id/include"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.224" app:layout_constraintVertical_bias="0.496"/>
+    <Button
+            android:text="Camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button4" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:id="@+id/camera" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/include"
-            android:onClick="tnv"/>
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.716" app:layout_constraintVertical_bias="0.45"/>
+
 </android.support.constraint.ConstraintLayout>
