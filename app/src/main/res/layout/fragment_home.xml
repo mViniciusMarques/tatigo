@@ -1,14 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context=".fragment.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment"/>
 
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+
+
+            <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_gravity="bottom"
+                              android:orientation="vertical">
+
+
+                    <ImageView
+                            android:background="@drawable/bolocenoura"
+                            android:layout_width="match_parent"
+                            android:layout_gravity="top"
+                            android:id="@+id/imageView3"
+                            android:layout_height="250dp"
+                            android:contentDescription="TODO"/>
+                    <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"/>
+                    <TextView
+                            android:text="Bolo de Cenoura"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
+                            android:textSize="30sp"
+                            android:id="@+id/textView5"/>
+                    <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"/>
+                    <TextView
+                            android:text="Massa fofinha, aerada e de cor vibrante coroada de uma irresistível cobertura de chocolate – às vezes crocante e firme; noutras, cremosa e brilhante. A fórmula do bolo de cenoura funciona tão bem que ele se tornou o queridinho entre as receitas caseiras. “O casamento é perfeito."
+                            android:layout_width="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:maxLines="5"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:id="@+id/textView6"/>
+
+                    <Button
+                            android:text="Encomendar"
+                            android:textColor="#0000EE"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:id="@+id/button4"/>
+
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_gravity="bottom"
+                              android:orientation="vertical">
+
+
+                    <ImageView
+                            android:background="@drawable/saladafruta"
+                            android:layout_width="match_parent"
+                            android:layout_gravity="top"
+                            android:id="@+id/imageView34"
+                            android:fitsSystemWindows="true"
+                            android:layout_height="250dp"/>
+                    <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"/>
+                    <TextView
+                            android:text="Salada de Fruta"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
+                            android:textSize="30sp"
+                            android:id="@+id/textView54"/>
+                    <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"/>
+                    <TextView
+                            android:text="Qui butcher farm-to-table locavore sunt quinoa. Bicycle rights pariatur marfa etsy, four loko lomo veniam fashion axe aesthetic. Actually irony quis selfies readymade narwhal. Nesciunt pinterest cillum, wolf swag american apparel carles ex butcher non veniam."
+                            android:layout_width="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:maxLines="5"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:id="@+id/textView64"/>
+
+                    <Button
+                            android:text="Encomendar"
+                            android:textColor="#0000EE"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:id="@+id/button44"/>
+
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+            >
+
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_gravity="bottom"
+                              android:orientation="vertical">
+
+
+                    <ImageView
+                            android:background="@drawable/chupchup"
+                            android:layout_width="match_parent"
+                            android:layout_gravity="top"
+                            android:id="@+id/imageView31"
+                            android:layout_height="250dp"
+                            android:contentDescription="TODO"/>
+                    <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"/>
+                    <TextView
+                            android:text="Chup Chup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
+                            android:textSize="30sp"
+                            android:id="@+id/textView51"/>
+                    <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"/>
+                    <TextView
+                            android:text="A mistura das frutas é uma forma criativa de inserir mais fibras, vitaminas e minerais na alimentação. A combinação de cores e sabores permite que a sensação seja não apenas de consumir frutas, mas sim de ingerir uma deliciosa sobremesa."
+                            android:layout_width="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:maxLines="5"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:id="@+id/textView61"/>
+
+                    <Button
+                            android:text="Encomendar"
+                            android:textColor="#0000EE"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:id="@+id/button14"/>
+
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+    </ScrollView>
 </FrameLayout>

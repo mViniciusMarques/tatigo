@@ -29,6 +29,8 @@ import android.widget.ImageView
 import android.provider.MediaStore
 import android.support.design.widget.Snackbar
 import android.util.Log
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -42,16 +44,21 @@ class CadastroProdutoFragment : Fragment() {
     val PICK_PHOTO_FOR_AVATAR = 1
     val TAKE_PHOTO_REQUEST = 2
 
-    val REQUEST_IMAGE_CAPTURE = 1
-    private var mImageBitmap: Bitmap? = null
-    private var mCurrentPhotoPath: String? = null
-    private val mImageView: ImageView? = null
 
+    var languages = arrayOf("oi", "tchau")
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        var v: View  =  inflater.inflate(R.layout.fragment_cadastro_produto, container, false);
+
+        var  values = arrayOf("Bolos", " Saladas de Frutas","Bombom");
 
 
-        return inflater.inflate(R.layout.fragment_cadastro_produto, container, false)
+        val spinner = v.findViewById(R.id.spinner_cadastro) as Spinner
+        val adapter = ArrayAdapter(this.activity, android.R.layout.simple_spinner_item, values)
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
+        spinner.adapter = adapter
+
+        return v;
     }
 
     override fun onResume() {

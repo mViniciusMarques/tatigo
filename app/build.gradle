@@ -95,5 +95,6 @@ dependencies {
         exclude module: 'support-v4'
     }
     implementation 'com.karumi:dexter:5.0.0'
+    implementation 'com.bestsoft32.tayyab:tt-fancy-gif-dialog:1.0.2'
 
 }

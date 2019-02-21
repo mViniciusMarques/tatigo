@@ -14,6 +14,9 @@ import com.parse.ParseUser
 import kotlinx.android.synthetic.main.activity_login.*
 import solutions.empire42.tatianego.MainActivity
 import solutions.empire42.tatianego.R
+import com.parse.LogInCallback
+import com.parse.ParseException
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -36,20 +39,20 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-
-            } else {
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf(Manifest.permission.CAMERA),
-                    MY_CAMERA_REQUEST_CODE
-                )
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
-            }
-        }
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
+//
+//            } else {
+//                ActivityCompat.requestPermissions(
+//                    this,
+//                    arrayOf(Manifest.permission.CAMERA),
+//                    MY_CAMERA_REQUEST_CODE
+//                )
+//                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+//                // app-defined int constant. The callback method gets the
+//                // result of the request.
+//            }
+//        }
     }
 
     private fun doUserLogin() {
@@ -58,16 +61,15 @@ class LoginActivity : AppCompatActivity() {
             if(!input_txt_email.text.contains("@")) {
                 Toast.makeText(this, "Email inválido!", Toast.LENGTH_SHORT).show();
             } else {
-                ParseUser.logInInBackground(input_txt_email.text.toString(), input_txt_senha.text.toString())
-                    .onSuccess {
-                    if(it.error != null) {
-                        startActivity(Intent(this, MainActivity::class.java))
+                ParseUser.logInInBackground(input_txt_email.text.toString(), input_txt_senha.text.toString()
+                ) { user, e ->
+                    if (user != null) {
+                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                     } else {
-                        Toast.makeText(this, "Usuário inválido!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this@LoginActivity, "Usuário inválido!", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
-
         } else {
             Toast.makeText(this, "Preencha os campos Login/ Senha !!", Toast.LENGTH_SHORT).show();
         }

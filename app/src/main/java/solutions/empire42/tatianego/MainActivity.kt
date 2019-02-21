@@ -2,6 +2,7 @@ package solutions.empire42.tatianego
 
 import android.Manifest
 import android.os.Bundle
+import android.os.Handler
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
@@ -18,7 +19,9 @@ import solutions.empire42.tatianego.fragment.CadastroProdutoFragment
 import solutions.empire42.tatianego.fragment.HomeFragment
 import solutions.empire42.tatianego.fragment.VaquinhaFragment
 import android.support.annotation.NonNull
-
+import android.view.WindowManager
+import android.widget.Spinner
+import solutions.empire42.tatianego.fragment.RecadoFragment
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -35,10 +38,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val fh = HomeFragment()
         loadFrag(fh, "Home", fm)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
@@ -47,6 +46,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
+            WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED
+        )
+
     }
 
     override fun onBackPressed() {
@@ -89,11 +94,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_manage -> {
 
             }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
-
+            R.id.nav_alert -> {
+                loadFrag(RecadoFragment(), "Recado da Tati", fm)
             }
         }
 
@@ -102,13 +104,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun loadFrag(f1: Fragment, name: String, fm: FragmentManager) {
+        val handle = Handler()
+        handle.post {
+            val ft = fm.beginTransaction()
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            ft.replace(R.id.fragment, f1, name)
+            ft.commit()
 
-        val ft = fm.beginTransaction()
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-        ft.replace(R.id.fragment, f1, name)
-        ft.commit()
+            supportActionBar!!.title = name
 
-        supportActionBar!!.title = name
+        }
     }
 
 }
