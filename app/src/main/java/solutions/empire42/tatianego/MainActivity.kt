@@ -15,13 +15,10 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import solutions.empire42.tatianego.fragment.CadastroProdutoFragment
-import solutions.empire42.tatianego.fragment.HomeFragment
-import solutions.empire42.tatianego.fragment.VaquinhaFragment
 import android.support.annotation.NonNull
 import android.view.WindowManager
 import android.widget.Spinner
-import solutions.empire42.tatianego.fragment.RecadoFragment
+import solutions.empire42.tatianego.fragment.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -92,7 +89,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 loadFrag(VaquinhaFragment(), "Vaquinha", fm)
             }
             R.id.nav_manage -> {
-
+                loadFrag(MeuPerfilFragment(), "Meu Perfil", fm)
             }
             R.id.nav_alert -> {
                 loadFrag(RecadoFragment(), "Recado da Tati", fm)

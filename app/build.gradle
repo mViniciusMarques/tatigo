@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'com.google.gms.google-services'
+
 buildscript {
     repositories {
         maven { url 'https://plugins.gradle.org/m2/' }
@@ -96,5 +98,8 @@ dependencies {
     }
     implementation 'com.karumi:dexter:5.0.0'
     implementation 'com.bestsoft32.tayyab:tt-fancy-gif-dialog:1.0.2'
-
+    implementation 'com.google.firebase:firebase-core:16.0.7'
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
+    implementation "com.github.parse-community.Parse-SDK-Android:fcm:1.18.5"
+    implementation 'com.parse.bolts:bolts-android:1.4.0'
 }

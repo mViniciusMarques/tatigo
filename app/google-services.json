@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "190380593606",
+    "firebase_url": "https://tatigo-4ab75.firebaseio.com",
+    "project_id": "tatigo-4ab75",
+    "storage_bucket": "tatigo-4ab75.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:190380593606:android:c2f288e4aa8a0bed",
+        "android_client_info": {
+          "package_name": "solutions.empire42.tatianego"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "190380593606-b99ob7a1761ngie6uu8chrl9t8khooiv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPULaBT1KV7pq9atMsvgGsYPsMYrQgir4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

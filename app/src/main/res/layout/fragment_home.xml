@@ -65,7 +65,7 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_height="wrap_content"
                             android:background="@android:color/transparent"
-                            android:id="@+id/button4"/>
+                            android:id="@+id/btn_encomendar_bolo"/>
 
 
                 </LinearLayout>
@@ -123,7 +123,7 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_height="wrap_content"
                             android:background="@android:color/transparent"
-                            android:id="@+id/button44"/>
+                            android:id="@+id/btn_encomendar_salada"/>
 
 
                 </LinearLayout>
@@ -183,7 +183,7 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_height="wrap_content"
                             android:background="@android:color/transparent"
-                            android:id="@+id/button14"/>
+                            android:id="@+id/btn_encomendar_chup"/>
 
 
                 </LinearLayout>

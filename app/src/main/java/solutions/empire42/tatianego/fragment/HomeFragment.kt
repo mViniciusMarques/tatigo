@@ -2,7 +2,6 @@ package solutions.empire42.tatianego.fragment
 
 
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -13,9 +12,13 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 import solutions.empire42.tatianego.R
 import android.widget.Toast
-import solutions.empire42.tatianego.MainActivity
-import com.bestsoft32.tt_fancy_gif_dialog_lib.TTFancyGifDialogListener
 import com.bestsoft32.tt_fancy_gif_dialog_lib.TTFancyGifDialog
+import com.parse.ParseObject
+import com.parse.ParseUser
+
+
+
+
 
 
 
@@ -40,7 +43,14 @@ class HomeFragment : Fragment() {
             WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED
         )
 
-        button4.setOnClickListener {
+        encomendarBoloDeCenouro()
+        encomendarSaladaDeFrutas()
+        encomendarChupChup()
+
+    }
+
+    private fun encomendarBoloDeCenouro() {
+        btn_encomendar_bolo.setOnClickListener {
             TTFancyGifDialog.Builder(mActivity)
                 .setTitle("Bolo de Cenoura")
                 .setMessage("Encomendar uma deliciosa fatia de bolo de cenoura.")
@@ -51,11 +61,46 @@ class HomeFragment : Fragment() {
                 .setGifResource(R.drawable.delivery)      //pass your gif, png or jpg
 
                 .isCancellable(true)
-                .OnPositiveClicked { Toast.makeText(mActivity, "Ok", Toast.LENGTH_SHORT).show() }
+                .OnPositiveClicked { adicionarProduto("Bolo de Cenoura") }
                 .OnNegativeClicked { Toast.makeText(mActivity, "Cancel", Toast.LENGTH_SHORT).show() }
                 .build()
         }
+    }
 
+    private fun encomendarSaladaDeFrutas() {
+        btn_encomendar_salada.setOnClickListener {
+            TTFancyGifDialog.Builder(mActivity)
+                .setTitle("Salada de Fruta")
+                .setMessage("Encomendar uma deliciosa salada de frutas fresquinha.")
+                .setPositiveBtnText("Sim")
+                .setPositiveBtnBackground("#22b573")
+                .setNegativeBtnText("Não")
+                .setNegativeBtnBackground("#c1272d")
+                .setGifResource(R.drawable.delivery)      //pass your gif, png or jpg
+
+                .isCancellable(true)
+                .OnPositiveClicked { adicionarProduto("Salada De Frutas") }
+                .OnNegativeClicked { Toast.makeText(mActivity, "Cancel", Toast.LENGTH_SHORT).show() }
+                .build()
+        }
+    }
+
+    private fun encomendarChupChup() {
+        btn_encomendar_chup.setOnClickListener {
+            TTFancyGifDialog.Builder(mActivity)
+                .setTitle("Salada de Fruta")
+                .setMessage("Encomendar chup-chup com um maravilhoso sabor.")
+                .setPositiveBtnText("Sim")
+                .setPositiveBtnBackground("#22b573")
+                .setNegativeBtnText("Não")
+                .setNegativeBtnBackground("#c1272d")
+                .setGifResource(R.drawable.delivery)      //pass your gif, png or jpg
+
+                .isCancellable(true)
+                .OnPositiveClicked { adicionarProduto("Chup Chup") }
+                .OnNegativeClicked { Toast.makeText(mActivity, "Cancel", Toast.LENGTH_SHORT).show() }
+                .build()
+        }
     }
 
     override fun onAttach(context: Activity?) {
@@ -65,7 +110,24 @@ class HomeFragment : Fragment() {
 
 
 
+    private fun adicionarProduto(s: String) {
 
+        val currentUser = ParseUser.getCurrentUser()
+        if (currentUser != null) {
+
+            val produto = ParseObject("Encomenda")
+            produto.put("tipo_produto", s)
+            produto.put("user_id", currentUser )
+            produto.put("ativo", true)
+            produto.saveInBackground()
+
+        } else {
+            // show the signup or login screen
+        }
+
+
+
+    }
 
 
 }

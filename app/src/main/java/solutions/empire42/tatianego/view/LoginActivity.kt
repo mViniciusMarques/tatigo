@@ -29,9 +29,16 @@ class LoginActivity : AppCompatActivity() {
         val decorView = window.decorView
         decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
 
-        btn_entrar.setOnClickListener {
+        val currentUser = ParseUser.getCurrentUser()
+        if (currentUser != null) {
             startActivity(Intent(this, MainActivity::class.java))
-        //  doUserLogin();
+        } else {
+            // show the signup or login screen
+        }
+
+        btn_entrar.setOnClickListener {
+           // startActivity(Intent(this, MainActivity::class.java))
+          doUserLogin();
         }
 
         btn_cadastrar.setOnClickListener {
@@ -56,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun doUserLogin() {
-        if(input_txt_email.text != null && input_txt_senha.text.isNotBlank()) {
+        if(input_txt_email.text.isNotBlank() && input_txt_senha.text.isNotBlank()) {
 
             if(!input_txt_email.text.contains("@")) {
                 Toast.makeText(this, "Email inválido!", Toast.LENGTH_SHORT).show();
@@ -71,7 +78,8 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         } else {
-            Toast.makeText(this, "Preencha os campos Login/ Senha !!", Toast.LENGTH_SHORT).show();
+            startActivity(Intent(this, MainActivity::class.java))
+          //  Toast.makeText(this, "Preencha os campos Login/ Senha !!", Toast.LENGTH_SHORT).show();
         }
     }
 

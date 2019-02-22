@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import com.parse.ParseUser
+import solutions.empire42.tatianego.MainActivity
 import solutions.empire42.tatianego.R
 
 
@@ -23,6 +24,7 @@ class SplashScreenActivity: AppCompatActivity() {
         decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
 
         addTimerToChangePage()
+
     }
 
 
