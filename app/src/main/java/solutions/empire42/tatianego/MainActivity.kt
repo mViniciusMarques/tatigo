@@ -94,6 +94,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_alert -> {
                 loadFrag(RecadoFragment(), "Recado da Tati", fm)
             }
+            R.id.nav_history -> {
+                loadFrag(HistoricoFragment(), "Histórico de Compras", fm)
+            }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)

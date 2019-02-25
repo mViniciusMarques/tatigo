@@ -1,6 +1,7 @@
 package solutions.empire42.tatianego.fragment
 
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -31,8 +32,9 @@ class MeuPerfilFragment : Fragment() {
         return view
     }
 
-    override fun onResume() {
-        super.onResume()
+
+    override fun onStart() {
+        super.onStart()
         logOutUser()
         getUserInformation()
     }
