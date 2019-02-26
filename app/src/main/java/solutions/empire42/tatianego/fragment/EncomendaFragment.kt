@@ -17,6 +17,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.parse.ParseObject
+import com.parse.ParseQuery
+import com.parse.ParseUser
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import solutions.empire42.tatianego.R
@@ -49,20 +52,52 @@ class EncomendaFragment : Fragment() {
             Historico("DOCE B", userManager?.loggedUser?.username, Date(), false, 0)
         )
 
-        recyclerView.adapter =
-                EncomendaAdapter(historicos.toList(), context, EncomendaAdapter.OnEncomendaItemClickListener {
-                    it.ativo = !it.ativo
+        val encomendaQuery = ParseQuery.getQuery<ParseObject>("Encomenda")
 
-                    Toast.makeText(context, "Item Clicked", Toast.LENGTH_LONG).show()
-                },
-                    EncomendaAdapter.OnEncomendaCheckClickListener {
-                        Toast.makeText(context, "Item Clicked " + it.produto + " " + it.ativo, Toast.LENGTH_LONG).show()
-                    }
-                )
+        encomendaQuery.whereEqualTo("user_id", ParseUser.getCurrentUser())
+        encomendaQuery.orderByDescending("createdAt")
+        encomendaQuery.limit = 5
+        encomendaQuery.findInBackground { objects, e ->
+            val his: MutableCollection<Historico> = arrayListOf()
+            objects.forEach {
+                val historico = Historico()
+                historico.objectId = it.objectId
+                historico.produto = it.get("tipo_produto").toString()
+                historico.dataHora = it.createdAt
+                historico.ativo = it.get("ativo") as Boolean?
+                historico.usuario = userManager!!.loggedUser.username
+
+
+                his.add(historico)
+//                Log.w("marcus", historico.usuario)
+//                Log.w("fanboy", it.objectId)
+            }
+
+            recyclerView.adapter = EncomendaAdapter(his.toList(), context, EncomendaAdapter.OnEncomendaItemClickListener {
+                it.ativo = !it.ativo
+
+                Toast.makeText(context, "Item Clicked", Toast.LENGTH_LONG).show()
+            },
+                EncomendaAdapter.OnEncomendaCheckClickListener {
+                    Toast.makeText(context, "Item Clicked " + it.produto + " " + it.ativo, Toast.LENGTH_LONG).show()
+                }
+            )
+
+        }
+
+//        recyclerView.adapter =
+//                EncomendaAdapter(historicos.toList(), context, EncomendaAdapter.OnEncomendaItemClickListener {
+//                    it.ativo = !it.ativo
+//
+//                    Toast.makeText(context, "Item Clicked", Toast.LENGTH_LONG).show()
+//                },
+//                    EncomendaAdapter.OnEncomendaCheckClickListener {
+//                        Toast.makeText(context, "Item Clicked " + it.produto + " " + it.ativo, Toast.LENGTH_LONG).show()
+//                    }
+//                )
 
         val layout = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView.layoutManager = layout
-
 
 
        // teste();
