@@ -9,31 +9,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import kotlinx.android.synthetic.main.fragment_home.*
-
 import solutions.empire42.tatianego.R
 import android.widget.Toast
 import com.bestsoft32.tt_fancy_gif_dialog_lib.TTFancyGifDialog
 import com.parse.ParseObject
 import com.parse.ParseUser
-
-
-
-
-
-
-
-
+import solutions.empire42.tatianego.core.UserSharedPreferenceManager
 
 class HomeFragment : Fragment() {
 
-    var mActivity = Activity();
+    var mActivity = Activity()
+    private var userManager: UserSharedPreferenceManager?= null
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        userManager = UserSharedPreferenceManager(context)
     }
 
     override fun onResume() {
@@ -111,14 +105,14 @@ class HomeFragment : Fragment() {
 
 
     private fun adicionarProduto(s: String) {
+        //val currentUser = ParseUser.getCurrentUser()
 
-        val currentUser = ParseUser.getCurrentUser()
-        if (currentUser != null) {
+        if (userManager!!.loggedUser != null) {
 
             val produto = ParseObject("Encomenda")
             produto.put("tipo_produto", s)
-            produto.put("user_id", currentUser )
-            produto.put("ativo", true)
+            produto.put("user_id", userManager!!.loggedUser )
+            produto.put("ativo", false)
             produto.saveInBackground()
 
         } else {

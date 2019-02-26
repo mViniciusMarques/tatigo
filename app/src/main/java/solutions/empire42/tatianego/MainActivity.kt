@@ -18,6 +18,8 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import android.support.annotation.NonNull
 import android.view.WindowManager
 import android.widget.Spinner
+import com.parse.ParseUser
+import solutions.empire42.tatianego.core.UserSharedPreferenceManager
 import solutions.empire42.tatianego.fragment.*
 
 
@@ -36,9 +38,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         loadFrag(fh, "Home", fm)
 
 
-        val toggle = ActionBarDrawerToggle(
-            this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
-        )
+        val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -48,6 +48,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
             WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED
         )
+
+        val userShared = UserSharedPreferenceManager(this)
+        userShared.setUserOnSharedPreference(ParseUser.getCurrentUser())
 
     }
 
@@ -66,17 +69,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        when (item.itemId) {
-            R.id.action_settings -> return true
-            else -> return super.onOptionsItemSelected(item)
+        return when (item.itemId) {
+            R.id.action_settings -> true
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
+
         when (item.itemId) {
             R.id.nav_camera -> {
                 loadFrag(CadastroProdutoFragment(), "Cadastrar Produto", fm)
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 loadFrag(HomeFragment(), "Home", fm)
             }
             R.id.nav_slideshow -> {
-                loadFrag(VaquinhaFragment(), "Vaquinha", fm)
+                loadFrag(EncomendaFragment(), "Encomendas Gerais", fm)
             }
             R.id.nav_manage -> {
                 loadFrag(MeuPerfilFragment(), "Meu Perfil", fm)
@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-    fun loadFrag(f1: Fragment, name: String, fm: FragmentManager) {
+    private fun loadFrag(f1: Fragment, name: String, fm: FragmentManager) {
         val handle = Handler()
         handle.post {
             val ft = fm.beginTransaction()
@@ -112,8 +112,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             ft.commit()
 
             supportActionBar!!.title = name
-
         }
     }
+
+
 
 }

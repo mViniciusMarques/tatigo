@@ -4,16 +4,31 @@ import java.util.Date;
 
 public class Historico {
 
+    private String objectId;
     private String produto;
     private String usuario;
     private Date dataHora;
-    private String ativo;
+    private Boolean ativo;
+    private int imagem;
 
-    public Historico(String produto, String usuario, Date dataHora, String ativo ) {
+    public Historico(String produto, String usuario, Date dataHora, Boolean ativo, int imagem ) {
         this.produto = produto;
         this.usuario = usuario;
         this.dataHora = dataHora;
         this.ativo = ativo;
+        this.imagem = imagem;
+    }
+
+    public Historico() {
+    }
+
+    public Historico(String objectId, String produto, String usuario, Date dataHora, Boolean ativo, int imagem) {
+        this.objectId = objectId;
+        this.produto = produto;
+        this.usuario = usuario;
+        this.dataHora = dataHora;
+        this.ativo = ativo;
+        this.imagem = imagem;
     }
 
     public String getProduto() {
@@ -40,11 +55,27 @@ public class Historico {
         this.dataHora = dataHora;
     }
 
-    public String getAtivo() {
+    public Boolean getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(String ativo) {
+    public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public int getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(int imagem) {
+        this.imagem = imagem;
+    }
+
+    public String getObjectId() {
+        return objectId;
+    }
+
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
     }
 }

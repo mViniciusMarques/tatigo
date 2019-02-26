@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import com.onesignal.OneSignal;
 import com.parse.*;
+import tgio.parselivequery.LiveQueryClient;
 
 public class App extends Application {
 
@@ -58,6 +59,13 @@ public class App extends Application {
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .init();
 
+
+//        LiveQueryClient.init(
+//                "wss://" + "tatianego.back4app.io",
+//                "VvKHXz1b1pyAzq7eKi53h9DvTWAPL1gAj9dSNYy0",
+//                true
+//        );// Example: 'wss://livequerytutorial.back4app.io'
+//        LiveQueryClient.connect();
 
     }
 

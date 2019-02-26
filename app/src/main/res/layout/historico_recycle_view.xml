@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_height="wrap_content"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical">
 
     <android.support.v7.widget.CardView
@@ -23,7 +24,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="151dp"
                     app:srcCompat="@drawable/cup_cake_icon"
-                    android:id="@+id/imageView"
+                    android:id="@+id/imageView_cartao"
                     android:layout_weight="1"/>
 
             <TextView
@@ -59,6 +60,7 @@
                     android:textSize="@dimen/_15sdp"
                     android:layout_marginStart="@dimen/_6sdp"
                     android:layout_marginEnd="@dimen/_6sdp"
+                    android:textColor="#960000"
                     android:id="@+id/produto_datahora_historico"
                     android:layout_weight="1"/>
 
