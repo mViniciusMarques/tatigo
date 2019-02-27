@@ -1,16 +1,16 @@
 package solutions.empire42.tatianego.core;
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
+import android.content.pm.ResolveInfo;
+import com.onesignal.OSNotificationOpenResult;
 import com.onesignal.OneSignal;
-import com.parse.*;
-import tgio.parselivequery.LiveQueryClient;
+import com.parse.Parse;
+import com.parse.ParseInstallation;
+
+import java.util.List;
 
 public class App extends Application {
 
@@ -24,52 +24,55 @@ public class App extends Application {
 
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("VvKHXz1b1pyAzq7eKi53h9DvTWAPL1gAj9dSNYy0")
-                // if desired
                 .clientKey("0o4aBsoHVoBKbvHbXdUUCKdLuWuL2egL1RAqqC6R")
                 .server("https://parseapi.back4app.com/")
                 .build()
         );
-
-       // ParseInstallation.getCurrentInstallation().saveInBackground();
 
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
         if (installation == null) {
             installation.put("GCMSenderId", "190380593606");
             installation.saveInBackground();
 
-            ParsePush.subscribeInBackground("Bolo de Cenoura", new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    if (e == null) {
-                        Log.d("com.parse.push", "successfully subscribed to the broadcast channel.");
-                    } else {
-                        Log.e("com.parse.push", "failed to subscribe for push", e);
-                    }
-                }
-            });
 
-
+            OneSignal.startInit(this)
+                    .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                    .unsubscribeWhenNotificationsAreDisabled(true)
+                    .init();
         }
-
-        //ParsePush.subscribeInBackground("Bolo de Cenoura");
-        //installation.saveInBackground();
-
-        OneSignal.startInit(this)
-                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-                .unsubscribeWhenNotificationsAreDisabled(true)
-                .init();
-
-
-//        LiveQueryClient.init(
-//                "wss://" + "tatianego.back4app.io",
-//                "VvKHXz1b1pyAzq7eKi53h9DvTWAPL1gAj9dSNYy0",
-//                true
-//        );// Example: 'wss://livequerytutorial.back4app.io'
-//        LiveQueryClient.connect();
-
     }
 
-    public Context getContext() {
+    public Context getContext () {
         return context;
+    }
+
+    public static void setBadge(Context context, int count) {
+        String launcherClassName = getLauncherClassName(context);
+        if (launcherClassName == null) {
+            return;
+        }
+        Intent intent = new Intent("android.intent.action.BADGE_COUNT_UPDATE");
+        intent.putExtra("badge_count", count);
+        intent.putExtra("badge_count_package_name", context.getPackageName());
+        intent.putExtra("badge_count_class_name", launcherClassName);
+        context.sendBroadcast(intent);
+    }
+
+    public static String getLauncherClassName(Context context) {
+
+        PackageManager pm = context.getPackageManager();
+
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+
+        List<ResolveInfo> resolveInfos = pm.queryIntentActivities(intent, 0);
+        for (ResolveInfo resolveInfo : resolveInfos) {
+            String pkgName = resolveInfo.activityInfo.applicationInfo.packageName;
+            if (pkgName.equalsIgnoreCase(context.getPackageName())) {
+                String className = resolveInfo.activityInfo.name;
+                return className;
+            }
+        }
+        return null;
     }
 }

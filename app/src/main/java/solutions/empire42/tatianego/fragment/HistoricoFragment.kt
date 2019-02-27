@@ -44,7 +44,7 @@ class HistoricoFragment : Fragment() {
 //            Historico("Salada de Frutas", user?.username, Date(), "Sim")
         )
         recyclerView.adapter = HistoricoAdapter(historicos.toList(), context, HistoricoAdapter.OnHistoricoItemClickListener {
-            Toast.makeText(getContext(), "Item Clicked", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Item Clicked", Toast.LENGTH_LONG).show()
         })
 
         val encomendaQuery = ParseQuery.getQuery<ParseObject>("Encomenda")
@@ -61,35 +61,26 @@ class HistoricoFragment : Fragment() {
                     historico.dataHora = it.createdAt
                     historico.usuario = userManager!!.loggedUser.username
 
+                    when {
+                        historico.produto.equals("Bolo de Cenoura", true) -> historico.imagem = R.drawable.cenoura
+                        historico.produto.equals("Chup Chup", true) -> historico.imagem = R.drawable.picole
+                        historico.produto.equals("Salada de Frutas", true) -> historico.imagem = R.drawable.frutas_total
+                        else -> historico.imagem = R.drawable.cup_cake_icon
+                    }
 
-                    if(historico.produto.equals("Bolo de Cenoura", true)) {
-                        historico.imagem = R.drawable.cenoura
-                    } else if(historico.produto.equals("Chup Chup", true)) {
-                        historico.imagem = R.drawable.picole
-                    } else if (historico.produto.equals("Salada de Frutas", true)) {
-                        historico.imagem = R.drawable.frutas_total
-                    }
-                    else {
-                        historico.imagem = R.drawable.cup_cake_icon
-                    }
                     his.add(historico)
                     Log.w("marcus", historico.usuario)
                     Log.w("fanboy", it.objectId)
-                        }
+                }
+
                     recyclerView.adapter!!.notifyDataSetChanged()
                     recyclerView.adapter = HistoricoAdapter(his.toList(), context, HistoricoAdapter.OnHistoricoItemClickListener {
-                            Toast.makeText(getContext(), "Item clicado " + it.produto , Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Item clicado " + it.produto , Toast.LENGTH_LONG).show()
                     })
             }
 
-
         val layout = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView.layoutManager = layout
-
-    }
-
-
-    public fun cliqueList() {
 
     }
 

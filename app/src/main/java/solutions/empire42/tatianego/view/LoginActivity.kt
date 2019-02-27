@@ -45,41 +45,33 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, CadastroUsuarioActivity::class.java))
         }
 
-
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-//            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-//
-//            } else {
-//                ActivityCompat.requestPermissions(
-//                    this,
-//                    arrayOf(Manifest.permission.CAMERA),
-//                    MY_CAMERA_REQUEST_CODE
-//                )
-//                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-//                // app-defined int constant. The callback method gets the
-//                // result of the request.
-//            }
-//        }
     }
 
     private fun doUserLogin() {
         if(input_txt_email.text.isNotBlank() && input_txt_senha.text.isNotBlank()) {
 
             if(!input_txt_email.text.contains("@")) {
-                Toast.makeText(this, "Email inválido!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Email inválido!", Toast.LENGTH_SHORT).show()
             } else {
                 ParseUser.logInInBackground(input_txt_email.text.toString(), input_txt_senha.text.toString()
                 ) { user, e ->
                     if (user != null) {
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                     } else {
-                        Toast.makeText(this@LoginActivity, "Usuário inválido!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this@LoginActivity, "Usuário inválido!", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         } else {
             startActivity(Intent(this, MainActivity::class.java))
           //  Toast.makeText(this, "Preencha os campos Login/ Senha !!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(ParseUser.getCurrentUser() != null) {
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
         }
     }
 

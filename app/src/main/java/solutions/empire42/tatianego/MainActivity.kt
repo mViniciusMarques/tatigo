@@ -1,6 +1,11 @@
 package solutions.empire42.tatianego
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.Snackbar
@@ -16,17 +21,26 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import android.support.annotation.NonNull
+import android.support.v4.app.NotificationCompat
+import android.util.Log
+import android.view.MenuInflater
 import android.view.WindowManager
 import android.widget.Spinner
 import com.parse.ParseUser
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
+import solutions.empire42.tatianego.core.App
 import solutions.empire42.tatianego.core.UserSharedPreferenceManager
 import solutions.empire42.tatianego.fragment.*
+import tgio.parselivequery.BaseQuery
+import tgio.parselivequery.LiveQueryEvent
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var fm: FragmentManager
 
+    @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -52,6 +66,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val userShared = UserSharedPreferenceManager(this)
         userShared.setUserOnSharedPreference(ParseUser.getCurrentUser())
 
+        App.setBadge(applicationContext, 40)
+
+    }
+
+    override fun onStart() {
+        super.onStart()
     }
 
     override fun onBackPressed() {
@@ -64,7 +84,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
+            menuInflater.inflate(R.menu.main, menu)
         return true
     }
 
@@ -76,13 +96,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-
         when (item.itemId) {
             R.id.nav_camera -> {
                 loadFrag(CadastroProdutoFragment(), "Cadastrar Produto", fm)
             }
             R.id.nav_gallery -> {
-
                 loadFrag(HomeFragment(), "Home", fm)
             }
             R.id.nav_slideshow -> {
@@ -115,6 +133,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-
-
+    private fun restrictAccess(): Boolean {
+        if(ParseUser.getCurrentUser().email != "tati@stefanini.com") {
+            return false;
+        }
+            return true;
+    }
 }
+
+

@@ -5,11 +5,14 @@ import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.NotificationCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -22,6 +25,7 @@ import com.parse.ParseQuery
 import com.parse.ParseUser
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import solutions.empire42.tatianego.MainActivity
 import solutions.empire42.tatianego.R
 import solutions.empire42.tatianego.adapter.EncomendaAdapter
 import solutions.empire42.tatianego.core.UserSharedPreferenceManager
@@ -30,6 +34,7 @@ import tgio.parselivequery.BaseQuery
 import tgio.parselivequery.LiveQueryClient
 import tgio.parselivequery.LiveQueryEvent
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class EncomendaFragment : Fragment() {
@@ -47,7 +52,7 @@ class EncomendaFragment : Fragment() {
         userManager = UserSharedPreferenceManager(context)
         val recyclerView = view!!.findViewById(R.id.recycle_encomenda) as RecyclerView
 
-        val historicos: MutableCollection<Historico> = arrayListOf(
+        val historicos: ArrayList<Historico> = arrayListOf(
             Historico("DOCE A", userManager?.loggedUser?.username, Date(), true, 0),
             Historico("DOCE B", userManager?.loggedUser?.username, Date(), false, 0)
         )
@@ -100,7 +105,8 @@ class EncomendaFragment : Fragment() {
         recyclerView.layoutManager = layout
 
 
-       // teste();
+        // notificar()
+       // creme()
     }
 
     private fun teste() {
@@ -115,38 +121,54 @@ class EncomendaFragment : Fragment() {
                 sub.doAsync {
                     uiThread {
                         Log.w("MOTORAMA", `object`.toString())
-                        notificar()
+                      creme()
                     }
                 }
             }
         }
     }
 
-    fun notificar() {
-        notificationManager =
-                context!!.getSystemService(
-                    Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        createNotificationChannel(
-            "solutions.empire42.tatianego",
-            "NotifyDemo News",
-            "Example News Channel")
-    }
-
     @SuppressLint("NewApi")
-    private fun createNotificationChannel(id: String, name: String,
-                                          description: String) {
+    fun creme() {
+        val padrao = longArrayOf(0, 100, 1000, 100, 1000)
+        val manager = activity!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        val importance = NotificationManager.IMPORTANCE_LOW
-        val channel = NotificationChannel(id, name, importance)
 
-        channel.description = description
-        channel.enableLights(true)
-        channel.lightColor = Color.RED
-        channel.enableVibration(true)
-        channel.vibrationPattern =
-                longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400)
-        notificationManager?.createNotificationChannel(channel)
+        var id = "my_channel_01";
+        var importance = NotificationManager.IMPORTANCE_LOW;
+        var mChannel =  NotificationChannel(id, "name",importance);
+        mChannel.enableLights(true);
+        manager. createNotificationChannel(mChannel);
+
+        var notification =  Notification.Builder(activity , id)
+            .setContentTitle("Title")
+            .setChannelId(id)
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .build()
+        // notification.vibrate = padrao
+        manager.notify(2, notification);
     }
+
+//    fun notificar() {
+//        val padrao = longArrayOf(0, 100, 1000, 100, 1000)
+//        val builder = NotificationCompat.Builder(context)
+//            .setSmallIcon(R.drawable.cup_cake_icon)
+//            .setVibrate(padrao)
+//            .setContentTitle("Atenção")
+//            .setContentText("Alteração no status do banheiro masculino")
+//
+//        val notificationIntent = Intent(context, MainActivity::class.java)
+//        val contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+//        builder.setContentIntent(contentIntent)
+//
+//        // Add as notification
+//        val manager = activity!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+//        manager.notify(0, builder.build())
+//    }
+
+
+
+
+
 
 }
