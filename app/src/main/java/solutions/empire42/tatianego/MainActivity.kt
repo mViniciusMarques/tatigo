@@ -1,14 +1,8 @@
 package solutions.empire42.tatianego
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
 import android.os.Bundle
 import android.os.Handler
-import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -18,22 +12,15 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import android.support.annotation.NonNull
-import android.support.v4.app.NotificationCompat
-import android.util.Log
-import android.view.MenuInflater
 import android.view.WindowManager
-import android.widget.Spinner
 import com.parse.ParseUser
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 import solutions.empire42.tatianego.core.App
 import solutions.empire42.tatianego.core.UserSharedPreferenceManager
 import solutions.empire42.tatianego.fragment.*
-import tgio.parselivequery.BaseQuery
-import tgio.parselivequery.LiveQueryEvent
+
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -72,6 +59,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onStart() {
         super.onStart()
+       // hideItem()
     }
 
     override fun onBackPressed() {
@@ -110,7 +98,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 loadFrag(MeuPerfilFragment(), "Meu Perfil", fm)
             }
             R.id.nav_alert -> {
-                loadFrag(RecadoFragment(), "Recado da Tati", fm)
+                loadFrag(CadernetaFragment(), "Recado da Tati", fm)
             }
             R.id.nav_history -> {
                 loadFrag(HistoricoFragment(), "Histórico de Compras", fm)
@@ -133,11 +121,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    private fun restrictAccess(): Boolean {
-        if(ParseUser.getCurrentUser().email != "tati@stefanini.com") {
-            return false;
+    private fun hideItem() {
+        if(ParseUser.getCurrentUser().email != getString(R.string.ADMIN_EMAIL)) {
+            var navigationView = findViewById<View>(R.id.nav_view) as NavigationView
+            val nav_Menu = navigationView.menu
+            nav_Menu.findItem(R.id.nav_slideshow).isVisible = false;
         }
-            return true;
     }
 }
 

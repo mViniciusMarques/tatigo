@@ -108,4 +108,5 @@ dependencies {
     implementation ('com.github.tgio:parse-livequery:1.0.3') {
         exclude group: "com.squareup.okhttp3"
     }
+    implementation 'com.mikhaellopez:lazydatepicker:1.0.0'
 }

@@ -143,7 +143,7 @@ class HomeFragment : Fragment() {
                         + "\"app_id\": \"845cdfda-0af9-4f94-893f-dee4d6e095d4\","
                         + "\"included_segments\": [\"filterByEmail\"],"
                         + "\"data\": {\"foo\": \"bar\"},"
-                        + "\"contents\": {\"en\": \" " + "Olá, " +  userManager?.loggedUser?.username + " está querendo um "  + produto + "\"}"
+                        + "\"contents\": {\"en\": \" " + "Olá, " +  userManager?.loggedUser?.username + " está querendo "  + produto + "\"}"
                         + "}")
 
 
