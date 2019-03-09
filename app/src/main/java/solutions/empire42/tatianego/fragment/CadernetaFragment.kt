@@ -27,6 +27,7 @@ import android.widget.ArrayAdapter
 import com.parse.ParseUser
 import com.parse.ktx.findAll
 import solutions.empire42.tatianego.adapter.ChupChupAdapter
+import solutions.empire42.tatianego.adapter.SaladaFrutaAdapter
 import solutions.empire42.tatianego.model.Caderneta
 
 
@@ -46,11 +47,7 @@ class CadernetaFragment : Fragment() {
     var retornoProdutosSaladaFruta: MutableCollection<Produto> = ArrayList()
     var retornoProdutosChupChup: MutableCollection<Produto> = ArrayList()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_caderneta, container, false)
     }
 
@@ -60,6 +57,7 @@ class CadernetaFragment : Fragment() {
         userManager = UserSharedPreferenceManager(context)
         val recyclerView = view!!.findViewById(R.id.recycle_bolo_cenoura) as RecyclerView
         val recyclerViewChup = view!!.findViewById(R.id.recycle_chup_chup) as RecyclerView
+        val recyclerViewSalada = view!!.findViewById(R.id.recycle_salada_fruta) as RecyclerView
         obterUsuarios()
 
         lazyDatePicker.setDateFormat(LazyDatePicker.DateFormat.DD_MM_YYYY)
@@ -68,36 +66,20 @@ class CadernetaFragment : Fragment() {
 
         val layout = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         val layout2 = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        val layout3 = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView.layoutManager = layout
         recyclerViewChup.layoutManager = layout2
+        recyclerViewSalada.layoutManager = layout3
 
-        val historicos: ArrayList<Produto> = arrayListOf(
-            Produto("Bolo cenoura", Date(), userManager?.loggedUser?.username, 9),
-            Produto("Bolo cenoura", Date(), userManager?.loggedUser?.username, 9),
-            Produto("Bolo cenoura", Date(), userManager?.loggedUser?.username, 9),
-            Produto("Bolo cenoura", Date(), userManager?.loggedUser?.username, 9),
-            Produto("Bolo cenoura", Date(), userManager?.loggedUser?.username, 9),
-            Produto("Bolo cenoura", Date(), userManager?.loggedUser?.username, 9)
-//            Historico("Salada de Frutas", user?.username, Date(), "Sim")
-        )
-
-
-        lazyDatePicker.setOnDatePickListener { dateSelected ->
-            dataSelecionada = dateSelected
-        }
+        lazyDatePicker.setOnDatePickListener { dateSelected -> dataSelecionada = dateSelected }
 
         inicializarCardenetas()
         executarRegrasUICadernetas()
 
-        usuarios.forEach {
-            listaUsuarios.add(it.username)
-            //listaUsuarios.add(it.email)
-        }
+        usuarios.forEach { listaUsuarios.add(it.username) }
 
         val autoComplete = view!!.findViewById(R.id.autoCompleteTextView) as AutoCompleteTextView
-        val adapter = ArrayAdapter<String>(
-            context, android.R.layout.simple_list_item_1, listaUsuarios. toList()
-        )
+        val adapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, listaUsuarios. toList())
         autoComplete.setAdapter(adapter)
 
         obterCadernetaUsuario()
@@ -182,8 +164,10 @@ class CadernetaFragment : Fragment() {
             if (data_user_box.visibility == View.VISIBLE) {
                 data_user_box.visibility = View.GONE
                 btn_buscar_rendimento.text = "Limpar"
+
+
                 this.obterCadernetaBoloCenoura()
-           //     this.obterCadernetaSaladaFruta()
+                this.obterCadernetaSaladaFruta()
                 this.obterCadernetaChupChup()
                 this.desbloquearResultadoPesquisa()
             } else {
@@ -263,38 +247,32 @@ class CadernetaFragment : Fragment() {
     }
 
     private fun obterCadernetaSaladaFruta() {
-        val cadernetaQuery = ParseQuery.getQuery<ParseObject>("Pessoa")
+        val useruery = ParseUser.getQuery();
         val produtoQuery = ParseQuery.getQuery<ParseObject>("Encomenda")
 
-        val useruery = ParseUser.getQuery();
-        useruery.whereEqualTo("username", "Filipy")
-        useruery.first
+        useruery.whereEqualTo("username", this.usuarioSelecionado)
 
-        val carnetaBoloCenoura = Caderneta()
-        val usuario = ParseUser()
-
-        usuario.objectId = "HA10PX9Fyy"
-        produtoQuery.whereEqualTo("user_id", usuario)
+        produtoQuery.whereEqualTo("user_id", useruery.first)
         produtoQuery.whereGreaterThan("createdAt", this.dataSelecionada)
-        produtoQuery.whereEqualTo("tipo_produto", "Salada de Frutas")
+        produtoQuery.whereEqualTo("tipo_produto", "Salada De Frutas")
 
         val produtosCadernetas = produtoQuery.find()
         this.quantidadeSaladaFrutas= produtosCadernetas.size
         produto_numero2.text = produtosCadernetas.size.toString()
 
-//        produtosCadernetas.forEach {
-//            var produto = Produto()
-//            produto.nome = it.getString("tipo_produto")
-//            produto.dataBase = it.createdAt
-//            this.retornoProdutosSaladaFruta.add(produto)
-//        }
-//
-//        recycle_bolo_cenoura.adapter = BoloCenouraAdapter(
-//            retornoProdutosSaladaFruta.toList(),
-//            context,
-//            BoloCenouraAdapter.OnBoloCenouraItemClickListener {
-//                Toast.makeText(context, "Item Clicked", Toast.LENGTH_LONG).show()
-//            })
+        produtosCadernetas.forEach {
+            var produto = Produto()
+            produto.nome = it.getString("tipo_produto")
+            produto.dataBase = it.createdAt
+            this.retornoProdutosSaladaFruta.add(produto)
+        }
+
+        recycle_salada_fruta.adapter = SaladaFrutaAdapter(
+            retornoProdutosSaladaFruta.toList(),
+            context,
+            SaladaFrutaAdapter.OnSaladaDeFrutaItemClickListener {
+                Toast.makeText(context, "Item Clicked", Toast.LENGTH_LONG).show()
+            })
     }
 
     private fun obterCadernetaChupChup() {
