@@ -8,6 +8,22 @@
         android:background="@drawable/purple2"
         tools:context=".view.LoginActivity">
 
+    <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loadingblocks"
+            android:visibility="invisible"
+            android:layout_width="313dp"
+            android:layout_height="145dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.28"
+            app:lottie_autoPlay="true"
+            app:lottie_colorFilter="#D7FFFFFF"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loadingabacate"
+            app:layout_constraintHorizontal_bias="0.571"/>
+
 
     <ec.dina.btefonts.TextViewFonts
             android:layout_width="373dp"
@@ -24,6 +40,7 @@
 
     <ImageView
             android:layout_width="374dp"
+            android:visibility="invisible"
             android:layout_height="82dp"
             app:srcCompat="@drawable/purpledivider"
             android:id="@+id/imageView2"
@@ -93,7 +110,7 @@
                     android:layout_height="match_parent"
                     android:inputType="textPassword"
                     android:textColorHint="#4c0051"
-                    android:imeOptions="actionNext"
+                    android:imeOptions="actionDone"
                     android:hint="Senha"
             />
         </android.support.design.widget.TextInputLayout>

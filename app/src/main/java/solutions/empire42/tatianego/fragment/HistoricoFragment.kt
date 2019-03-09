@@ -72,11 +72,13 @@ class HistoricoFragment : Fragment() {
                     Log.w("marcus", historico.usuario)
                     Log.w("fanboy", it.objectId)
                 }
-
+                 loadingblocks4.visibility = View.GONE
                     recyclerView.adapter!!.notifyDataSetChanged()
                     recyclerView.adapter = HistoricoAdapter(his.toList(), context, HistoricoAdapter.OnHistoricoItemClickListener {
                             Toast.makeText(context, "Item clicado " + it.produto , Toast.LENGTH_LONG).show()
                     })
+
+
             }
 
         val layout = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

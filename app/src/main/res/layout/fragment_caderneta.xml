@@ -8,7 +8,7 @@
 
     <android.support.v7.widget.CardView
             android:layout_width="0dp"
-            android:layout_height="163dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             app:cardCornerRadius="@dimen/_15sdp"
             app:layout_constraintTop_toTopOf="parent"
@@ -26,27 +26,37 @@
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:id="@+id/data_user_box"
+                android:orientation="vertical"
+                android:focusableInTouchMode="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
             <android.support.design.widget.TextInputLayout
                     android:id="@+id/lbl_nome_prod"
-                    android:layout_width="328dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:hintTextAppearance="@style/TextAppearance.AppCompat"
                     app:errorEnabled="true"
-                    android:layout_marginStart="15dp"
+                    android:focusableInTouchMode="true"
                     android:layout_marginEnd="8dp"
                     android:layout_marginTop="10dp"
             >
-                <EditText
-                        android:id="@+id/input_txt_email"
+
+                <AutoCompleteTextView
+                        android:id="@+id/autoCompleteTextView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="textEmailAddress"
                         android:backgroundTint="#4c0051"
-                        android:imeOptions="actionNext"
+                        android:focusableInTouchMode="true"
+                        android:imeOptions="actionDone"
                         android:hint="Usuario"
                 />
+
+
             </android.support.design.widget.TextInputLayout>
 
             <com.mikhaellopez.lazydatepicker.LazyDatePicker
@@ -57,7 +67,11 @@
                     android:layout_marginEnd="@dimen/_20sdp"
                     app:ldp_text_color="@color/colorPrimary"
                     app:ldp_hint_color="#b9000000"
+                    android:gravity="center"
                     app:ldp_date_format="dd-mm-yyyy" />
+
+        </LinearLayout>
+
             <TextView
                     android:text="Buscar"
                     android:layout_marginTop="@dimen/_15sdp"
@@ -69,111 +83,220 @@
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView10"/>
+                    android:id="@+id/btn_buscar_rendimento"/>
 
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.CardView
-            android:id="@+id/card_principal_caderneta"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="@dimen/_15sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/cardView2"
-            app:layout_constraintVertical_bias="0.060000002">
 
 
-        <LinearLayout
-                android:id="@+id/liner_vertical_pai"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <android.support.v7.widget.CardView
+                android:id="@+id/card_principal_caderneta"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="@dimen/_15sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/cardView2"
+                app:layout_constraintVertical_bias="0.060000002">
+
 
             <LinearLayout
-                    android:id="@+id/liner_vertical_filho"
-                    android:orientation="horizontal"
+                    android:id="@+id/liner_vertical_pai"
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-
-                <FrameLayout
-                        android:layout_width="101dp"
-                        android:layout_height="75dp">
-                    <ImageView
-                            android:src="@drawable/cup_cake_icon"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:id="@+id/imageView"/>
-                </FrameLayout>
+                    android:layout_height="wrap_content">
 
                 <LinearLayout
-                        android:id="@+id/liner_vertical_neto"
-                        android:orientation="vertical"
-                        android:layout_width="185dp"
-                        android:layout_height="wrap_content">
+                        android:id="@+id/liner_vertical_filho"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="76dp">
 
-                    <TextView
-                            android:text="Bolo de Cenoura"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/produto_tipo"
-                            android:layout_marginTop="@dimen/_10sdp"
-                    />
 
-                    <TextView
-                            android:text="Data Inicio"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/produto_data"/>
+                    <FrameLayout
+                            android:layout_width="101dp"
+                            android:layout_height="75dp">
+                        <ImageView
+                                android:src="@drawable/cup_cake_icon"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/imageView"/>
+                    </FrameLayout>
 
-                    <TextView
-                            android:text="Usuario"
-                            android:layout_marginTop="@dimen/_10sdp"
+                    <LinearLayout
+                            android:id="@+id/liner_vertical_neto"
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        <TextView
+                                android:text="Bolo de Cenoura"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/produto_tipo"
+                                android:layout_marginTop="@dimen/_5sdp"
+                        />
+
+                        <TextView
+                                android:text="Data Inicio"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/produto_data"/>
+
+                        <TextView
+                                android:text="Usuario"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/produto_usuario"/>
+                    </LinearLayout>
+
+                    <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/produto_usuario"/>
+                            android:layout_height="match_parent"
+                            android:layout_gravity="end"
+                    >
+                        <TextView
+                                android:text="40"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginRight="@dimen/_5sdp"
+                                android:gravity="center"
+                                android:id="@+id/produto_numero"
+                                android:textSize="@dimen/_38sdp"
+                        />
+                    </FrameLayout>
+
                 </LinearLayout>
 
                 <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="96dp"
+                        android:layout_width="376dp"
+                        android:layout_height="200dp"
                         android:layout_gravity="end"
+                        android:id="@+id/frame_recycle_bolo"
+                        android:visibility="gone"
                 >
-                    <TextView
-                            android:text="40"
+
+                    <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycle_bolo_cenoura"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginRight="@dimen/_5sdp"
-                            android:gravity="center"
-                            android:id="@+id/produto_numero"
-                            android:textSize="@dimen/_38sdp"
-                    />
+                            android:layout_height="match_parent"/>
                 </FrameLayout>
 
             </LinearLayout>
 
-            <FrameLayout
-                    android:layout_width="376dp"
-                    android:layout_height="200dp"
-                    android:layout_gravity="end"
-                    android:id="@+id/frame_recycle_bolo"
-                    android:visibility="gone"
-            >
+        </android.support.v7.widget.CardView>
 
-            </FrameLayout>
+    <android.support.v7.widget.CardView
+                android:id="@+id/card_principal_caderneta2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="@dimen/_15sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/cardView2"
+                app:layout_constraintVertical_bias="0.48000002">
 
-        </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+            <LinearLayout
+                    android:id="@+id/liner_vertical_pai2"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
+                <LinearLayout
+                        android:id="@+id/liner_vertical_filho2"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="77dp">
+
+
+                    <FrameLayout
+                            android:layout_width="101dp"
+                            android:layout_height="97dp">
+                        <ImageView
+                                android:src="@drawable/cup_cake_icon"
+                                android:layout_width="match_parent"
+                                android:layout_height="73dp"
+                                android:id="@+id/imageView2"/>
+                    </FrameLayout>
+
+                    <LinearLayout
+                            android:id="@+id/liner_vertical_neto2"
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        <TextView
+                                android:text="Salada de Fruta"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/produto_tipo2"
+                                android:layout_marginTop="@dimen/_5sdp"
+                        />
+
+                        <TextView
+                                android:text="Data Inicio"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/produto_data2"/>
+
+                        <TextView
+                                android:text="Usuario"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/produto_usuario2"/>
+                    </LinearLayout>
+
+                    <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="end"
+                    >
+                        <TextView
+                                android:text="02"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginRight="@dimen/_5sdp"
+                                android:gravity="center"
+                                android:id="@+id/produto_numero2"
+                                android:textSize="@dimen/_38sdp"
+                        />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <FrameLayout
+                        android:layout_width="376dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="end"
+                        android:id="@+id/frame_recycle_bolo2"
+                        android:visibility="gone"
+                >
+
+                    <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycle_salada_fruta"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
     <android.support.v7.widget.CardView
             android:id="@+id/card_principal_caderneta3"
             android:layout_width="0dp"
@@ -199,7 +322,7 @@
                     android:id="@+id/liner_vertical_filho3"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="77dp">
 
 
                 <FrameLayout
@@ -208,14 +331,14 @@
                     <ImageView
                             android:src="@drawable/cup_cake_icon"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="74dp"
                             android:id="@+id/imageView3"/>
                 </FrameLayout>
 
                 <LinearLayout
                         android:id="@+id/liner_vertical_neto3"
                         android:orientation="vertical"
-                        android:layout_width="185dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
                     <TextView
@@ -223,19 +346,19 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/produto_tipo3"
-                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
                     />
 
                     <TextView
                             android:text="Data Inicio"
-                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/produto_data3"/>
 
                     <TextView
                             android:text="Usuario"
-                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/produto_usuario3"/>
@@ -248,6 +371,7 @@
                 >
                     <TextView
                             android:text="15"
+                            android:layout_marginStart="@dimen/_30sdp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginRight="@dimen/_5sdp"
@@ -262,109 +386,16 @@
             <FrameLayout
                     android:layout_width="376dp"
                     android:layout_height="200dp"
+                    android:background="#3BFFFFFF"
                     android:layout_gravity="end"
                     android:id="@+id/frame_recycle_bolo3"
                     android:visibility="gone"
             >
 
-            </FrameLayout>
-
-        </LinearLayout>
-
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-            android:id="@+id/card_principal_caderneta2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="@dimen/_15sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/cardView2"
-            app:layout_constraintVertical_bias="0.48000002">
-
-
-        <LinearLayout
-                android:id="@+id/liner_vertical_pai2"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            <LinearLayout
-                    android:id="@+id/liner_vertical_filho2"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-
-                <FrameLayout
-                        android:layout_width="101dp"
-                        android:layout_height="97dp">
-                    <ImageView
-                            android:src="@drawable/cup_cake_icon"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:id="@+id/imageView2"/>
-                </FrameLayout>
-
-                <LinearLayout
-                        android:id="@+id/liner_vertical_neto2"
-                        android:orientation="vertical"
-                        android:layout_width="185dp"
-                        android:layout_height="wrap_content">
-
-                    <TextView
-                            android:text="Salada de Fruta"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/produto_tipo2"
-                            android:layout_marginTop="@dimen/_10sdp"
-                    />
-
-                    <TextView
-                            android:text="Data Inicio"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/produto_data2"/>
-
-                    <TextView
-                            android:text="Usuario"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/produto_usuario2"/>
-                </LinearLayout>
-
-                <FrameLayout
+                <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycle_chup_chup"
                         android:layout_width="match_parent"
-                        android:layout_height="96dp"
-                        android:layout_gravity="end"
-                >
-                    <TextView
-                            android:text="02"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginRight="@dimen/_5sdp"
-                            android:gravity="center"
-                            android:id="@+id/produto_numero2"
-                            android:textSize="@dimen/_38sdp"
-                    />
-                </FrameLayout>
-
-            </LinearLayout>
-
-            <FrameLayout
-                    android:layout_width="376dp"
-                    android:layout_height="200dp"
-                    android:layout_gravity="end"
-                    android:id="@+id/frame_recycle_bolo2"
-                    android:visibility="gone"
-            >
+                        android:layout_height="match_parent"/>
 
             </FrameLayout>
 

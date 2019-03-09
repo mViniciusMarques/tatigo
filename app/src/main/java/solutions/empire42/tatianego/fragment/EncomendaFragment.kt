@@ -23,6 +23,7 @@ import android.widget.Toast
 import com.parse.ParseObject
 import com.parse.ParseQuery
 import com.parse.ParseUser
+import kotlinx.android.synthetic.main.fragment_encomenda.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import solutions.empire42.tatianego.MainActivity
@@ -87,6 +88,7 @@ class EncomendaFragment : Fragment() {
                     Toast.makeText(context, "Item Clicked " + it.produto + " " + it.ativo, Toast.LENGTH_LONG).show()
                 }
             )
+            loadingblocks2.visibility = View.GONE
 
         }
 

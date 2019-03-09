@@ -9,6 +9,8 @@ import com.onesignal.OSNotificationOpenResult;
 import com.onesignal.OneSignal;
 import com.parse.Parse;
 import com.parse.ParseInstallation;
+import solutions.empire42.tatianego.helper.CustomNotificationOpenedHandler;
+import solutions.empire42.tatianego.helper.CustomNotificationReceivedHandler;
 
 import java.util.List;
 
@@ -34,12 +36,14 @@ public class App extends Application {
             installation.put("GCMSenderId", "190380593606");
             installation.saveInBackground();
 
-
-            OneSignal.startInit(this)
-                    .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-                    .unsubscribeWhenNotificationsAreDisabled(true)
-                    .init();
         }
+
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .setNotificationOpenedHandler( new CustomNotificationOpenedHandler() )
+                .setNotificationReceivedHandler(new CustomNotificationReceivedHandler() )
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
     }
 
     public Context getContext () {

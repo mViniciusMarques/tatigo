@@ -1,6 +1,7 @@
 package solutions.empire42.tatianego.view
 
 import android.Manifest
+import android.animation.Animator
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -56,6 +57,7 @@ class LoginActivity : AppCompatActivity() {
                 ParseUser.logInInBackground(input_txt_email.text.toString(), input_txt_senha.text.toString()
                 ) { user, e ->
                     if (user != null) {
+                        loadingblocks.visibility = View.VISIBLE
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                     } else {
                         Toast.makeText(this@LoginActivity, "Usuário inválido!", Toast.LENGTH_SHORT).show()

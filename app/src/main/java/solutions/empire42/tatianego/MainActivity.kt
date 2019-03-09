@@ -98,10 +98,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 loadFrag(MeuPerfilFragment(), "Meu Perfil", fm)
             }
             R.id.nav_alert -> {
-                loadFrag(CadernetaFragment(), "Recado da Tati", fm)
+                loadFrag(RecadoFragment(), "Recado da Tati", fm)
             }
             R.id.nav_history -> {
                 loadFrag(HistoricoFragment(), "Histórico de Compras", fm)
+            }
+            R.id.nav_book -> {
+                loadFrag(CadernetaFragment(), "Registro Geral", fm)
             }
         }
 

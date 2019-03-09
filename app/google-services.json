@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "190380593606-1tfjbf6mra8qg5g94oufhoeva28b3s15.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "solutions.empire42.tatianego",
+            "certificate_hash": "52066a95ac4a71d16ccbad2ddbfc222f4a6f206d"
+          }
+        },
+        {
           "client_id": "190380593606-b99ob7a1761ngie6uu8chrl9t8khooiv.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "190380593606-b99ob7a1761ngie6uu8chrl9t8khooiv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
